@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from data_pipeline.views import TriggerIndexFlowView
+from search.views import ProductSearchView, DynamicSearchView
 
 urlpatterns = [
     path('api/data_pipeline/v1/import_json_data/', TriggerIndexFlowView.as_view(), name='trigger-index-flow'),
+    path('api/search/v1/product_search/search/', ProductSearchView.as_view(), name='product-search'),
+    path('api/search/v1/<str:index_name>/search/', DynamicSearchView.as_view(), name='dynamic-search'),
 ]
