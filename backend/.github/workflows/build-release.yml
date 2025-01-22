@@ -1,0 +1,61 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+    paths:
+      - '.Dockerfile.base'
+  release:
+    types: [published]
+
+jobs:
+  build-base-image:
+    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') && contains(github.event.head_commit.modified, '.Dockerfile.base')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build and push base Docker image
+        run: |
+          docker build -f .Dockerfile.base -t ghcr.io/${{ github.repository }}/base-image:latest .
+          docker push ghcr.io/${{ github.repository }}/base-image:latest
+
+  build-release-image:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build and push release Docker image
+        run: |
+          docker build -t ghcr.io/${{ github.repository }}/release-image:${{ github.event.release.tag_name }} .
+          docker push ghcr.io/${{ github.repository }}/release-image:${{ github.event.release.tag_name }}
+
+  create-release-asset:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create zip file
+        run: |
+          zip release-assets.zip .env.example docker-compose.yaml backend/.backend.env
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./release-assets.zip
+          asset_name: release-assets.zip
+          asset_content_type: application/zip
