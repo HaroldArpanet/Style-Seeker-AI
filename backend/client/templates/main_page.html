@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Seeker AI</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div id="logo">
+        <h1>Style Seeker</h1> </div>
+    <div id="search-container">
+        <input type="text" id="search-box" placeholder="Write to I find product for you.">
+        <button id="search-button">Search</button>
+    </div>
+    <div id="products-container"></div>
+    <div id="github-link">
+        <a href="https://github.com/HaroldArpanet/Style-Seeker-AI/">
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo">
+        </a>
+    </div>
+    <script>
+        const SERVER_ADDRESS = "{{ server_address }}";
+    </script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

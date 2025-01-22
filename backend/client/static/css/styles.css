@@ -1,0 +1,183 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#logo {
+    margin-top: 20px;
+    text-align: center; /* Center the logo */
+}
+
+#search-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#search-box {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#search-button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+#products-container {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    width: 80%;
+}
+
+.product-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+.product-box img{
+    max-width: 100%;
+    height: auto;
+}
+
+#github-link {
+    margin-top: 20px;
+    text-align: center;
+}
+#github-link img{
+    width: 50px;
+    height: auto;
+}
+#chat-container {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 20px;
+    flex-direction: row;
+}
+
+#chat-panel {
+    width: 30%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto;
+    height: 70vh; /* Adjust height based on screen size */
+    margin-right: 10px;
+}
+#chat-panel input{
+    width: 100%;
+    box-sizing: border-box;
+}
+#product-display {
+    width: 67%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    overflow-y: scroll;
+    height: 400px;
+}
+#product-display img{
+    max-width: 100%;
+    height: auto;
+}
+#chat-container {
+    display: flex;
+    width: 80%;
+    margin-top: 20px;
+}
+
+#chat-panel {
+    width: 30%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 70vh; /* Adjust height based on screen size */
+    margin-right: 10px;
+}
+
+#chat-history {
+    flex-grow: 1; /* Take up remaining space */
+    overflow-y: auto; /* Enable scrolling */
+    margin-bottom: 10px; /* Space between chat history and input */
+}
+
+#chat-input {
+    flex-grow: 1; /* Take up remaining space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#chat-input-container {
+    display: flex;
+    gap: 10px; /* Space between input and button */
+}
+
+#send-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Product Display Styles */
+#product-display {
+    width: 70%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    overflow-y: auto;
+    height: 70vh;
+}
+
+#product-display .product-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#product-display .product-box img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive Styles for Mobile Devices */
+@media (max-width: 768px) {
+    #chat-container {
+        flex-direction: column;
+    }
+
+    #chat-panel {
+        width: 100%;
+        height: 40vh; /* Adjust height for mobile */
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    #product-display {
+        width: 100%;
+        height: 50vh; /* Adjust height for mobile */
+    }
+}
