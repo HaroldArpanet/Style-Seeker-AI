@@ -5,8 +5,8 @@ on:
     branches:
       - main
       - develop
-    paths:
-      - 'Dockerfile.base'
+    # paths:
+    #   - 'Dockerfile.base'
   release:
     types: [published]
 
