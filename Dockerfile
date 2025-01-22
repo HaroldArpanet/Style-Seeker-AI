@@ -1,9 +1,5 @@
 FROM ghcr.io/haroldarpanet/style_seeker_ai/base-image:latest
 
-# Install Rust and Cargo
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-ENV PATH="/root/.cargo/bin:${PATH}"
-
 COPY pyproject.toml poetry.lock ./
 
 RUN poetry config virtualenvs.create false

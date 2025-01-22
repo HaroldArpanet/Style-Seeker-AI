@@ -7,7 +7,6 @@ license = "GPL-3.0"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-pendulum = { version = "3.0.0", allow-prereleases = true, extras = ["no-pep517"] }
 python = "^3.13"
 django = "^5.1.5"
 djangorestframework = "^3.15.2"

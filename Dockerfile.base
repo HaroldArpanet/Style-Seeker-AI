@@ -48,4 +48,6 @@ RUN python -m venv $POETRY_VENV \
     && $POETRY_VENV/bin/pip install -U pip setuptools \
     && $POETRY_VENV/bin/pip install poetry==${POETRY_VERSION}
 
-ENV PATH="${PATH}:${POETRY_VENV}/bin"
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+ENV PATH="${PATH}:${POETRY_VENV}/bin:/root/.cargo/bin"
