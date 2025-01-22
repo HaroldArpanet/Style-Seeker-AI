@@ -1,7 +1,6 @@
 name: Main Workflow
 
 on:
-  workflow_call:
   push:
     branches:
       - main
