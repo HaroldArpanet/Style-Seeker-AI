@@ -27,8 +27,7 @@ jobs:
           context: .
           file: Dockerfile.base
           push: true
-          tags: |
-            ghcr.io/${{ format('{0}/{1}/base-image:latest', github.repository_owner, github.event.repository.name | tolower) }}
+          tags: ghcr.io/haroldarpanet/style_seeker_ai/base-image:latest
 
   build-release-image:
     if: github.event_name == 'release'
@@ -47,8 +46,8 @@ jobs:
           file: Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ format('{0}/{1}/release-image:{2}', github.repository_owner, github.event.repository.name | tolower, github.event.release.tag_name) }}
-            ghcr.io/${{ format('{0}/{1}/release-image:latest', github.repository_owner, github.event.repository.name | tolower) }}
+            ghcr.io/haroldarpanet/style_seeker_ai/release-image:${{ github.event.release.tag_name }}
+            ghcr.io/haroldarpanet/style_seeker_ai/release-image:latest
 
   create-release-asset:
     if: github.event_name == 'release'
