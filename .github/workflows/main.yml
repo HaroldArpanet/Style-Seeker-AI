@@ -6,12 +6,13 @@ on:
       - main
       - develop
     paths:
-      - '.Dockerfile.base'
+      - 'Dockerfile.base'
   release:
     types: [published]
 
 jobs:
   build-base-image:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -21,9 +22,12 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build and push base Docker image
-        run: |
-          docker build -f .Dockerfile.base -t ghcr.io/${{ github.repository }}/base-image:latest .
-          docker push ghcr.io/${{ github.repository }}/base-image:latest
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: Dockerfile.base
+          push: true
+          tags: ghcr.io/${{ github.repository }}/base-image:latest
 
   build-release-image:
     if: github.event_name == 'release'
@@ -36,9 +40,13 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build and push release Docker image
-        run: |
-          docker build -t ghcr.io/${{ github.repository }}/release-image:${{ github.event.release.tag_name }} .
-          docker push ghcr.io/${{ github.repository }}/release-image:${{ github.event.release.tag_name }}
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/release-image:${{ github.event.release.tag_name }}
+            ghcr.io/${{ github.repository }}/release-image:latest
 
   create-release-asset:
     if: github.event_name == 'release'
@@ -52,7 +60,7 @@ jobs:
           zip release-assets.zip .env.example docker-compose.yaml backend/.backend.env
 
       - name: Upload release asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v2
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: ./release-assets.zip
