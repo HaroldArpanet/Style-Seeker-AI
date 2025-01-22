@@ -1,4 +1,4 @@
-FROM ghcr.io/HaroldArpanet/Style-Seeker-AI/base-image:latest
+FROM ghcr.io/haroldarpanet/style_seeker_ai/base-image:latest
 
 COPY pyproject.toml poetry.lock ./
 
