@@ -12,7 +12,6 @@ on:
 
 jobs:
   build-base-image:
-    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && contains(github.event.head_commit.modified, '.Dockerfile.base')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
