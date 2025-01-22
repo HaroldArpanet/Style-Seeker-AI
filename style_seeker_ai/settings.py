@@ -86,8 +86,8 @@ DATABASES = {
         'NAME': config('POSTGRES_DB', 'style_seeker_ai'),
         'USER': config('POSTGRES_USER', 'user'),
         'PASSWORD': config('POSTGRES_PASSWORD', 'password'),
-        'HOST': os.getenv('POSTGRES_HOST', 'postgres'),
-        'PORT': os.getenv('POSTGRES_PORT', '5432'),
+        'HOST': config('POSTGRES_HOST', 'postgres'),
+        'PORT': config('POSTGRES_PORT', '5432'),
     }
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',

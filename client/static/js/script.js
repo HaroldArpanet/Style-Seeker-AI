@@ -69,7 +69,7 @@ function switchToProductPage(query) {
             chatHistory.innerHTML += `<div class="message">user: ${userMessage}</div>`;
 
             try {
-                const response = await fetch('${API_BASE_URL}/api/llm_chat/v1/chat/', {
+                const response = await fetch(`${API_BASE_URL}/api/llm_chat/v1/chat/`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
