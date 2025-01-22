@@ -9,9 +9,9 @@ on:
     types: [published]
 
 jobs:
-  call-build-base-image:
-    if: github.event_name == 'push'
-    uses: ./.github/workflows/build-base-image.yml
+#   call-build-base-image:
+#     if: github.event_name == 'push'
+#     uses: ./.github/workflows/build-base-image.yml
 
   build-release-image:
     if: github.event_name == 'release'
