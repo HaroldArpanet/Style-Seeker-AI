@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - dev
+      - develop
     paths:
       - '.Dockerfile.base'
   release:
@@ -12,7 +12,7 @@ on:
 
 jobs:
   build-base-image:
-    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev') && contains(github.event.head_commit.modified, '.Dockerfile.base')
+    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') && contains(github.event.head_commit.modified, '.Dockerfile.base')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
