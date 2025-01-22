@@ -1,0 +1,13 @@
+FROM ghcr.io/HaroldArpanet/Style-Seeker-AI/base-image:latest
+
+COPY pyproject.toml poetry.lock ./
+
+RUN poetry config virtualenvs.create false
+
+RUN poetry install --no-interaction --no-ansi
+
+COPY . /app/
+
+EXPOSE 8000
+
+CMD ["gunicorn", "--config", "gunicorn_config.py", "style_seeker_ai.wsgi:application"]
