@@ -16,6 +16,12 @@ prefect = "^3.1.13"
 meilisearch = "^0.33.1"
 minio = "^7.2.15"
 python-decouple = "^3.8"
+openai = "^1.59.9"
+python-telegram-bot = "^21.10"
+django-cors-headers = "^4.6.0"
+gunicorn = "^23.0.0"
+whitenoise = "^6.8.2"
+psycopg2-binary = "^2.9.10"
 
 
 [build-system]

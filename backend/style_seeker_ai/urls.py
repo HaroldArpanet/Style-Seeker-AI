@@ -15,12 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from data_pipeline.views import TriggerIndexFlowView
 from search.views import ProductSearchView, DynamicSearchView
+from llm_chat.views import ChatView
 
 urlpatterns = [
     path('api/data_pipeline/v1/import_json_data/', TriggerIndexFlowView.as_view(), name='trigger-index-flow'),
     path('api/search/v1/product_search/search/', ProductSearchView.as_view(), name='product-search'),
     path('api/search/v1/<str:index_name>/search/', DynamicSearchView.as_view(), name='dynamic-search'),
+    path('api/llm_chat/v1/chat/', ChatView.as_view(), name='chat'),
+    path('', include('client.urls')),
 ]

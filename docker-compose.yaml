@@ -1,4 +1,13 @@
 services:
+  style_seeker_ai:
+    image: ghcr.io/HaroldArpanet/Style-Seeker-AI/style_seeker_ai:latest
+    container_name: style_seeker_ai
+    restart: always
+    ports:
+      - "8000:8000"
+    env_file:
+      - .backend.env
+
   meilisearch:
     image: getmeili/meilisearch:v1.12
     container_name: meilisearch
@@ -38,7 +47,6 @@ services:
     command: server /data --console-address ":9001"
     restart: unless-stopped
 
-# PREFECT_RESULTS_PERSIST_BY_DEFAULT=true && path of prefect results in container: ~/.prefect/storage/
 volumes:
   meili_data:
     external: true
