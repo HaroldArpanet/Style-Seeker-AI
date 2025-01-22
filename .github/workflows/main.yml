@@ -56,3 +56,4 @@ jobs:
           asset_path: ./release-assets.zip
           asset_name: release-assets.zip
           asset_content_type: application/zip
+          token: ${{ secrets.GITHUB_TOKEN }}
