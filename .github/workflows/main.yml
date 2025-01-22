@@ -34,27 +34,3 @@ jobs:
           tags: |
             ghcr.io/haroldarpanet/style_seeker_ai/release-image:${{ github.event.release.tag_name }}
             ghcr.io/haroldarpanet/style_seeker_ai/release-image:latest
-
-  create-release-asset:
-    if: github.event_name == 'release'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Create zip file
-        run: |
-          zip release-assets.zip .env.example docker-compose.yaml .backend.env.example
-
-      - name: Upload release asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./release-assets.zip
-          asset_name: release-assets.zip
-          asset_content_type: application/zip
