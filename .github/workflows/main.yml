@@ -1,0 +1,35 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types: [published]
+
+jobs:
+#   call-build-base-image:
+#     if: github.event_name == 'push'
+#     uses: ./.github/workflows/build-base-image.yml
+
+  build-release-image:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build and push release Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/haroldarpanet/style_seeker_ai/release-image:${{ github.event.release.tag_name }}
+            ghcr.io/haroldarpanet/style_seeker_ai/release-image:latest
