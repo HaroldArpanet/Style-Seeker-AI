@@ -1,10 +1,28 @@
 services:
   style_seeker_ai:
-    image: ghcr.io/HaroldArpanet/Style-Seeker-AI/style_seeker_ai:latest
+    image: ghcr.io/haroldarpanet/style_seeker_ai/release-image:production-0.1.9
     container_name: style_seeker_ai
     restart: always
     ports:
       - "8000:8000"
+    env_file:
+      - .backend.env
+  
+  prefect_server:
+    image: ghcr.io/haroldarpanet/style_seeker_ai/release-image:production-0.1.9
+    container_name: prefect_server
+    command: ["prefect", "server", "start"]
+    restart: always
+    ports:
+      - "4200:4200"
+    env_file:
+      - .backend.env
+  
+  telegram_bot:
+    image: ghcr.io/haroldarpanet/style_seeker_ai/release-image:production-0.1.9
+    container_name: telegram_bot
+    command: ["python", "manage.py", "telegram_bot"]
+    restart: always
     env_file:
       - .backend.env
 
