@@ -61,8 +61,8 @@ function switchToProductPage(query) {
     const sendButton = document.getElementById('send-button');
     const productDisplay = document.getElementById('product-display');
 
-    async function sendMessage() {
-        const userMessage = chatInput.value.trim();
+    async function sendMessage(query) {
+        const userMessage = query;
         if (userMessage) {
             chatData.push({ role: 'user', content: userMessage });
             localStorage.setItem('chatData', JSON.stringify(chatData));
@@ -101,14 +101,15 @@ function switchToProductPage(query) {
 
     chatInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
-            sendMessage();
+            const userMessage = chatInput.value.trim();
+            sendMessage(userMessage);
         }
     });
 
     chatHistory.scrollTop = chatHistory.scrollHeight;
 
     if (query) {
-        fetchProducts(query, productDisplay);
+        sendMessage(query);
     }
 }
 
